@@ -8,7 +8,9 @@
         "coordinates": [13.415982, 52.608204]
       },
       "properties": {
-        "prop0": "value0"
+        "title": "ikusei GmbH",
+        "languages" : "ruby-on-rails, javascript",
+        "marker-color" : "ff0000"
       }
     }
   ]

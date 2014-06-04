@@ -1,17 +1,11 @@
-require 'rubygems'
-require 'sinatra'
-require 'thin'
-require 'haml'
-require 'json'
-require 'net/http'
-
-class GoogleMapsApi
+class Geocoder
   attr_accessor :formatted_address, :lat, :lng, :metro
   def initialize( address, city, state )
     @address = address
     @city = city
     @state = state
     @geocode_url = create_geocode_url
+    puts @geocode_url
     @results = get_json_response
     @formatted_address = @results['results'][0]['formatted_address']
     @lat = @results['results'][0]['geometry']['location']['lat']
@@ -39,17 +33,3 @@ class GoogleMapsApi
   end
 end
 
-get '/' do
-  haml :form
-end
-
-post '/' do
-  if params.any?
-    address = params[:address]
-    city    = params[:city]
-    state   = params[:state]
-
-    geo_object = GoogleMapsApi.new(address, city, state)
-    "coordinates are lat: #{geo_object.lat}, lng: #{geo_object.lng}"
-  end
-end
